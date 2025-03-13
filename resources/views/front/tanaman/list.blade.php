@@ -5,10 +5,10 @@
             @foreach ($tanaman as $t)
             <div class="col-lg-4 col-sm-6">
             <div class="event-post">
-                <div class="event-thumb"> 
+                <div class="event-thumb">
                     <a href="{{ asset('tanaman/detail/'.$t->id_tanaman) }}">
                         <i class="fas fa-link"></i>
-                    </a> 
+                    </a>
                     <img src="{{ asset('storage/images/tanaman/'.$t->gambar) }}" alt="">
                 </div>
                 <div class="event-txt">

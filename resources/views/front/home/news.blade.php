@@ -7,19 +7,20 @@
                     <h2 class="wow slideInDown" data-wow-delay="0.5s">Walkot Farm</h2>
                 </div>
             </div>
-            <div class="col-md-6"> 
-                <a href="{{ asset('/berita') }}" class="view-more wow zoomIn" data-wow-delay="0.5s">Lihat Selengkapnya</a> 
+            <div class="col-md-6">
+                <a href="{{ asset('/berita') }}" class="view-more wow zoomIn" data-wow-delay="0.5s">Lihat Selengkapnya</a>
             </div>
         </div>
         <div class="row">
+            @if(isset($footer['berita']) && (is_array($footer['berita'])))
             @foreach ($footer['berita'] as $index => $kt)
             @if($index == 4)
                 @break
             @endif
             <div class="col-md-6">
                 <div class="blog-small-post wow zoomIn" data-wow-delay="1.5s">
-                    <div class="post-thumb"> 
-                        <a href="{{ asset('/berita/'.$kt['id']) }}"><i class="fas fa-link"></i></a> 
+                    <div class="post-thumb">
+                        <a href="{{ asset('/berita/'.$kt['id']) }}"><i class="fas fa-link"></i></a>
                         @if($kt['thumbnail'])
                         <img src="https://barat.jakarta.go.id/storage/images/berita/thumbnail/{{ $kt['thumbnail'] }}">
                         @else
@@ -40,6 +41,7 @@
                 </div>
             </div>
             @endforeach
+            @endif
         </div>
     </div>
 </section>

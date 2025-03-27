@@ -8,9 +8,11 @@ class TanamanKategori extends Model
 {
     protected $table = "tanaman_kategori";
     protected $primaryKey = 'id_kategori';
+    protected $fillable = ['nama_kategori'];
 
-    public function detail()
+
+    public function tanaman()
     {
-        return $this->hasMany(TanamanDetail::class, 'id_tanaman');
+        return $this->hasMany(TanamanDetail::class, 'id_kategori');
     }
 }

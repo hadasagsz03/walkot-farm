@@ -1,0 +1,134 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+    margin-top: auto;
+    padding: 10px 0;
+}
+
+
+.max-w-lg {
+    max-width: 900px;
+    width: 100%;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul */
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: #2d6a4f;
+    margin-bottom: 15px;
+}
+
+/* Alert sukses */
+.bg-green-500 {
+    background-color: #10b981;
+    padding: 12px;
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Label */
+label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+/* Input, select, textarea */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+    background-color: #f8f9fa;
+}
+
+/* Hover & Focus */
+input:hover, select:hover, textarea:hover,
+input:focus, select:focus, textarea:focus {
+    border-color: #3b82f6;
+    background-color: white;
+    outline: none;
+}
+
+/* Error Styling */
+.border-red-500 {
+    border-color: #dc2626 !important;
+}
+
+.text-red-500 {
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Tombol Submit */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover */
+button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+/* Gaya khusus untuk file input */
+input[type="file"] {
+    padding: 8px;
+    background-color: white;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .max-w-lg {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}

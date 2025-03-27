@@ -24,7 +24,7 @@
                             @foreach ($t as $h)
                             <div class="item">
                                 <div class="pro-box">
-                                    <img src="storage/images/tanaman/{{ $h->gambar }}" alt="Gambar Tanaman">
+                                    <img src="{{ asset('storage/images/tanaman/'.$h->gambar) }}" alt="Gambar Tanaman">
                                     <h5>{{ $h->nama_tanaman_indonesia }}</h5>
                                     <div class="pro-hover">
                                         <h6>{{ $h->nama_tanaman_latin }}</h6>

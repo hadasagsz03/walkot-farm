@@ -13,6 +13,7 @@
                     <div class="footer-widget">
                         <h4 class="wow fadeIn" data-wow-delay="0.5s">Berita Terbaru</h4>
                         <ul class="lastest-products">
+                            @if(isset($footer['berita']) && is_array($footer['berita']))
                             @foreach ($footer['berita'] as $index => $fk)
                             @if($index == 3)
                                 @break
@@ -27,6 +28,7 @@
                                 <span class="pdate"><i>Published:</i> {{ \Carbon\Carbon::parse($fk['published_at'])->isoFormat('D MMMM Y') }}</span>
                             </li>
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>

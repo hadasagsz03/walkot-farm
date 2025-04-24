@@ -20,11 +20,11 @@
       <!-- CSS FILES End -->
    </head>
    <body>
-      <div class="wrapper home2">
-      @include('front.header')
-      @include('front.paging')
-      @include('front.auth.login')
-      @include('front.footer')
+      <div class="wrapper auth">
+        @include('front.header')
+        @include('front.home.slider')
+        @yield('content')
+        @include('front.footer')
       </div>
       <!--   JS Files Start  -->
       <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

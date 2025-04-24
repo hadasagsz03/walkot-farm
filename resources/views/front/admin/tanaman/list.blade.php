@@ -1,94 +1,52 @@
-@extends('front.admin.header')
+@extends('front.admin.main')
 
 @section('content')
-<div class="content-wrapper container mt-5">
-    <!-- Header -->
-    <h5 class="text-success fw-bold">Tanaman Yang Terdaftar Pada</h5>
-    <h2 class="fw-bold">Walkot Farm</h2>
 
-    <!-- Filter Kategori -->
-    <div class="d-flex gap-2 my-4">
-        <button class="btn btn-success active" onclick="showCategory('produktif', this)">Tanaman Produktif</button>
-        <button class="btn btn-outline-success" onclick="showCategory('toga', this)">Tanaman Toga</button>
-        <button class="btn btn-outline-success" onclick="showCategory('hias', this)">Tanaman Hias</button>
-    </div>
-
-    <!-- Kategori Tanaman -->
-    <div id="produktif" class="category-section active">
-        <div class="row">
-            @foreach ($produktif as $tanaman)
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm border-0 tanaman-card">
-                        <img src="{{ asset('storage/images/tanaman/' . $tanaman->gambar) }}" class="card-img-top rounded tanaman-image" alt="{{ $tanaman->nama_tanaman_indonesia }}">
-                        <div class="overlay">
-                            <a href="{{ route('admin.tanaman.detail', ['id_tanaman' => $tanaman->id_tanaman]) }}" class="btn btn-success btn-icon">
-                                <i class="fas fa-link"></i>
-                            </a>
-                            <a href="{{ route('admin.tanaman.edit', ['id' => $tanaman->id_tanaman]) }}" class="btn btn-warning btn-icon">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="fw-bold">{{ $tanaman->nama_tanaman_indonesia }}</h5>
-                            <p class="text-muted"><i>{{ $tanaman->nama_tanaman_latin }}</i></p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <!-- Kategori Lainnya -->
-    <div id="toga" class="category-section d-none">
-        <div class="row">
-            @foreach ($toga as $tanaman)
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm border-0 tanaman-card">
-                        <img src="{{ asset('storage/images/tanaman/' . $tanaman->gambar) }}" class="card-img-top rounded tanaman-image" alt="{{ $tanaman->nama_tanaman_indonesia }}">
-                        <div class="overlay">
-                            <a href="{{ route('admin.tanaman.detail', ['id_tanaman' => $tanaman->id_tanaman]) }}" class="btn btn-success btn-icon">
-                                <i class="fas fa-link"></i>
-                            </a>
-                            <a href="{{ route('admin.tanaman.edit', ['id' => $tanaman->id_tanaman]) }}" class="btn btn-warning btn-icon">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="fw-bold">{{ $tanaman->nama_tanaman_indonesia }}</h5>
-                            <p class="text-muted"><i>{{ $tanaman->nama_tanaman_latin }}</i></p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div id="hias" class="category-section d-none">
-        <div class="row">
-            @foreach ($hias as $tanaman)
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm border-0 tanaman-card">
-                        <img src="{{ asset('storage/images/tanaman/' . $tanaman->gambar) }}" class="card-img-top rounded tanaman-image" alt="{{ $tanaman->nama_tanaman_indonesia }}">
-                        <div class="overlay">
-                            <a href="{{ route('admin.tanaman.detail', ['id_tanaman' => $tanaman->id_tanaman]) }}" class="btn btn-success btn-icon">
-                                <i class="fas fa-link"></i>
-                            </a>
-                            <a href="{{ route('admin.tanaman.edit', ['id' => $tanaman->id_tanaman]) }}" class="btn btn-warning btn-icon">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="fw-bold">{{ $tanaman->nama_tanaman_indonesia }}</h5>
-                            <p class="text-muted"><i>{{ $tanaman->nama_tanaman_latin }}</i></p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Daftar Tanaman</h1>
+    <a href="{{ route('admin.tanaman.create') }}" class="inline-flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+        <i class="bi bi-plus-circle mr-2"></i> Tambah Tanaman
+    </a>
 </div>
 
-<!-- Load CSS & JS -->
-<link rel="stylesheet" href="{{ asset('css/tanaman.css') }}">
-<script src="{{ asset('js/tanaman.js') }}"></script>
+<div class="bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-bold mb-4">Tanaman Kategori: {{ $kategori }}</h2>
+
+    <table class="min-w-full text-sm text-left border border-gray-300">
+        <thead class="bg-gray-100 font-semibold">
+            <tr>
+                <th class="p-2 border">ID Tanaman</th>
+                <th class="p-2 border">ID Kategori</th>
+                <th class="p-2 border">Nama Indonesia</th>
+                <th class="p-2 border">Nama Latin</th>
+                <th class="p-2 border text-center">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($tanaman as $item)
+            <tr class="border-b">
+                <td class="p-2 border">{{ $item->id_tanaman }}</td>
+                <td class="p-2 border">{{ $item->id_kategori }}</td>
+                <td class="p-2 border">{{ $item->nama_tanaman_indonesia }}</td>
+                <td class="p-2 border italic">{{ $item->nama_tanaman_latin }}</td>
+                <td class="p-2 border text-center space-x-2">
+                    <a href="{{ route('admin.tanaman.detail', ['id_tanaman' => $item->id_tanaman]) }}" class="text-blue-600" title="Lihat Detail">
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
+                    <a href="{{ route('admin.tanaman.edit', ['id' => $item->id_tanaman]) }}" class="text-yellow-500" title="Edit">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <form action="{{ route('admin.tanaman.delete', ['id' => $item->id_tanaman]) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600" title="Hapus">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection

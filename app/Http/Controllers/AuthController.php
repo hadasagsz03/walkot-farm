@@ -30,7 +30,7 @@ class AuthController extends Controller
 
     public function login_view() {
         if (Auth::check()) {
-            return redirect()->route('admin.main'); // 🔧 Perbaikan: arahkan ke dashboard admin
+            return redirect()->route('admin.home.dashboard');
         }
         return view("front.auth.login", [
             'page' => "Login"
@@ -63,10 +63,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             User::where('id', Auth::id())->update(['email_verified_at' => Carbon::now()]);
-            return redirect()->route('admin.main'); // ✅ Redirect ke dashboard admin
+            return redirect()->route('admin.home.dashboard');
         } else {
             Session::flash('error', 'Email atau password salah');
-            return redirect()->back(); // 🔧 Perbaikan: kembali ke halaman login, bukan "/"
+            return redirect()->back();
         }
     }
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
     }
 
     public function logout() {
-        if (Auth::check()) { // 🔧 Tambahkan pengecekan sebelum logout
+        if (Auth::check()) {
             Auth::logout();
         }
         return redirect('/');

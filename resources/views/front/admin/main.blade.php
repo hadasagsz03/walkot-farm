@@ -1,47 +1,39 @@
-@extends('layouts.admin')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/favicon.png') }}">
+    <title>Admin Dashboard</title>
 
-@section('content')
-<div class="container mt-4">
-    <h3>Total Tanaman Yang Terdaftar Pada</h3>
-    <h1>Walkot Farm</h1>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <div class="row mt-4 align-items-start"> <!-- Memastikan sejajar ke atas -->
-        <!-- Kategori Tanaman (Sebelah Kiri - Vertikal) -->
-        <div class="col-md-4">
-            <div class="card text-center p-3 shadow-sm mb-3">
-                <h2 class="text-success">{{ $totalProduktif }}</h2>
-                <p>Tanaman Produktif</p>
-            </div>
-            <div class="card text-center p-3 shadow-sm mb-3">
-                <h2 class="text-success">{{ $totalToga }}</h2>
-                <p>Tanaman Toga</p>
-            </div>
-            <div class="card text-center p-3 shadow-sm mb-3">
-                <h2 class="text-success">{{ $totalHias }}</h2>
-                <p>Tanaman Hias</p>
-            </div>
-        </div>
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Section List dan Tambah Tanaman (Sebelah Kanan - Vertikal, Sejajar dengan Atas) -->
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h2>List Tanaman</h2>
-                </div>
-                <div class="card-body">
-                    <a href="{{ route('admin.tanaman.list') }}" class="btn btn-success">Lihat Tanaman</a>
-                </div>
-            </div>
+    @stack('styles')
+</head>
+<body class="bg-green-50 flex">
+    @include('front.admin.sidebar')
 
-            <div class="card mt-3">
-                <div class="card-header">
-                    <h2>Tambah Tanaman</h2>
-                </div>
-                <div class="card-body">
-                    <a href="{{ route('admin.tanaman.create') }}" class="btn btn-primary">Tambah Tanaman</a>
-                </div>
-            </div>
-        </div>
+    <div class="ml-64 flex-1 flex flex-col min-h-screen">
+        @include('front.admin.header')
+        <main class="p-6 flex-1">
+            @yield('content')
+        </main>
+        @include('front.admin.footer')
     </div>
-</div>
-@endsection
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownTanaman');
+            dropdown.classList.toggle('hidden');
+        }
+    </script>
+
+    @stack('scripts')
+</body>
+</html>

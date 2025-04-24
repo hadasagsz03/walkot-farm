@@ -158,4 +158,56 @@ class TanamanController extends Controller
         return redirect()->route('admin.tanaman.list')->with('success', 'Tanaman berhasil ditambahkan.');
     }
 
+    public function destroy($id)
+    {
+        // Find the plant by ID
+        $tanaman = Tanaman::findOrFail($id);
+
+        // Delete the plant
+        $tanaman->delete();
+
+        // Redirect back with a success message
+        return redirect()->route('admin.tanaman.list')->with('success', 'Tanaman berhasil dihapus!');
+    }
+
+    public function cari(Request $request)
+    {
+        $keyword = $request->query('q');
+
+        if (!$keyword) {
+            return redirect()->back()->with('error', 'Keyword tidak ditemukan');
+        }
+
+        $tanaman = Tanaman::where('nama_tanaman_indonesia', 'like', "%{$keyword}%")
+            ->orWhere('nama_tanaman_latin', 'like', "%{$keyword}%")
+            ->get();
+
+        return view('front.admin.home.cari', compact('tanaman', 'keyword'));
+    }
+
+    public function showAll()
+    {
+        $tanaman = Tanaman::all();
+
+        return view('front.admin.tanaman.list', [
+            'tanaman' => $tanaman,
+            'kategori' => 'Semua Tanaman',
+            'total' => $tanaman->count()
+        ]);
+    }
+
+    public function filterByKategori($kategori)
+    {
+        // Dapatkan ID kategori dari nama kategori
+        $kategoriModel = TanamanKategori::where('nama_kategori', $kategori)->firstOrFail();
+
+        // Ambil tanaman berdasarkan ID kategori
+        $tanaman = Tanaman::where('id_kategori', $kategoriModel->id_kategori)->get();
+
+        return view('front.admin.tanaman.list', [
+            'kategori' => $kategori,
+            'tanaman' => $tanaman
+        ]);
+    }
+
 }

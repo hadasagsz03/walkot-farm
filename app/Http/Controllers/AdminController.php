@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TanamanDetail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\VisitorStatistic;
+use App\Models\Kegiatan;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +16,7 @@ class AdminController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        return view('front.admin.main'); // Arahkan ke main.blade.php dalam folder front/admin
+        return view('front.admin.home.dashboard');
     }
 
     public function main()
@@ -24,6 +26,15 @@ class AdminController extends Controller
         $totalToga = TanamanDetail::where('id_kategori', 2)->count(); // Kategori Toga
         $totalHias = TanamanDetail::where('id_kategori', 3)->count(); // Kategori Hias
 
-        return view('front.admin.main', compact('totalProduktif', 'totalToga', 'totalHias'));
+        // Ambil data tanaman untuk galeri (misalnya 10 tanaman pertama)
+        $tanamans = TanamanDetail::take(10)->get();
+
+        return view('front.admin.home.dashboard', compact('totalProduktif', 'totalToga', 'totalHias', 'tanamans'));
+    }
+
+    public function berita()
+    {
+        $beritas = Kegiatan::orderBy('id', 'desc')->get();
+        return view('front.admin.berita', compact('beritas'));
     }
 }

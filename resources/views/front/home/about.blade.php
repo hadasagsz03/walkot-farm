@@ -2,7 +2,7 @@
 <section class="home2-about wf100 p100 gallery">
 <div class="container">
     <div class="row">
-        <div class="col-md-5 wow fadeInLeft" data-wow-delay="1.0s">>
+        <div class="col-md-5 wow fadeInLeft" data-wow-delay="1.0s">
             <div class="video-img"> <a href="https://youtu.be/oEEhiwTbefU" data-rel="prettyPhoto" title="Peresmian Walkot Farm 4 0 Jakarta Barat"><i class="fas fa-play"></i></a> <img src="images/h2about.jpg" alt=""> </div>
         </div>
         <div class="col-md-7">

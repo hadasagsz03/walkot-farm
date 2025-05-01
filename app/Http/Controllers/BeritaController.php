@@ -20,12 +20,6 @@ class BeritaController extends Controller
         ]);
     }
 
-    public function index()
-    {
-        $beritas = Kegiatan::orderBy('id', 'asc')->get();
-        return view('front.admin.berita.list', compact('beritas'));
-    }
-
     public function detail_berita($id) {
         $berita_detail = $this->get_berita($id);
 
@@ -37,6 +31,16 @@ class BeritaController extends Controller
             'jenis_page' => "Berita",
             'page' => "detail",
             'berita_detail' => $berita_detail,
+        ]);
+    }
+
+    public function index()
+    {
+        $berita_paginate = $this->get_paginate_berita('kegiatan');
+
+        return view('front.admin.berita.list', [
+            'beritas' => $berita_paginate['data'] ?? [],
+            'pagination' => $berita_paginate,
         ]);
     }
 
@@ -72,45 +76,45 @@ class BeritaController extends Controller
         return view('front.admin.berita.show', compact('berita'));
     }
 
-    public function edit($id)
-    {
-        $berita = Kegiatan::findOrFail($id);
-        return view('front.admin.berita.edit', compact('berita'));
-    }
+    //public function edit($id)
+    //{
+    //    $berita = Kegiatan::findOrFail($id);
+    //    return view('front.admin.berita.edit', compact('berita'));
+    //}
 
-    public function update(Request $request, $id)
-    {
-        $berita = Kegiatan::findOrFail($id);
+    //public function update(Request $request, $id)
+    //{
+    //    $berita = Kegiatan::findOrFail($id);
 
-        $data = $request->validate([
-            'judul' => 'required|string|max:255',
-            'reporter' => 'required|string|max:255',
-            'isi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tanggal' => 'required|date',
-            'pengunjung' => 'nullable|integer',
-        ]);
+    //    $data = $request->validate([
+    //        'judul' => 'required|string|max:255',
+    //        'reporter' => 'required|string|max:255',
+    //        'isi' => 'required|string',
+    //        'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    //        'tanggal' => 'required|date',
+    //        'pengunjung' => 'nullable|integer',
+    //    ]);
 
         // Upload gambar jika ada file baru
-        if ($request->hasFile('gambar')) {
+    //    if ($request->hasFile('gambar')) {
             // Hapus gambar lama jika ada
-            if ($berita->gambar && file_exists(public_path('storage/berita/' . $berita->gambar))) {
-                unlink(public_path('storage/berita/' . $berita->gambar));
-            }
+    //        if ($berita->gambar && file_exists(public_path('storage/berita/' . $berita->gambar))) {
+    //            unlink(public_path('storage/berita/' . $berita->gambar));
+    //        }
 
-            $gambarBaru = $request->file('gambar')->store('berita', 'public');
-            $data['gambar'] = basename($gambarBaru);
-        }
+    //        $gambarBaru = $request->file('gambar')->store('berita', 'public');
+    //        $data['gambar'] = basename($gambarBaru);
+    //    }
 
-        $berita->update($data);
+    //    $berita->update($data);
 
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
-    }
+    //    return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
+    //}
 
-    public function destroy($id)
-    {
-        $berita = Kegiatan::findOrFail($id);
-        $berita->delete();
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');
-    }
+    //public function destroy($id)
+    //{
+    //    $berita = Kegiatan::findOrFail($id);
+    //    $berita->delete();
+    //    return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');
+    //}
 }

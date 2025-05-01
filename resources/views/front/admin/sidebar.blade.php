@@ -1,5 +1,5 @@
 <aside class="w-64 h-screen bg-white shadow-md fixed overflow-y-auto">
-    <div class="text-center py-6 font-bold text-2xl border-b text-green-700">Walkot-Farm</div>
+    <div class="text-center py-6 font-bold text-2xl border-b text-green-800">Walkot-Farm</div>
     <nav class="flex flex-col p-4 space-y-2">
 
         <!-- Dashboard -->
@@ -45,9 +45,9 @@
         </div>
 
         <!-- Berita -->
-        <a href="{{ route('admin.berita') }}"
+        <a href="{{ route('admin.berita.index') }}"
            class="flex items-center px-3 py-2 rounded transition-all duration-200
-           {{ request()->routeIs('admin.berita') ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-700 hover:bg-gray-200' }}">
+           {{ request()->routeIs('admin.berita.index') ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-700 hover:bg-gray-200' }}">
             <i class="bi bi-newspaper mr-2"></i> Berita
         </a>
     </nav>

@@ -24,7 +24,6 @@ Route::get('/tanaman/detail/{id_tanaman}', [TanamanController::class, 'detail'])
 Route::get('/tanaman/kategori/{kategori}', [TanamanController::class, 'index']);
 Route::get('/berita', [BeritaController::class, 'main']);
 Route::get('/berita/{id}', [BeritaController::class, 'detail_berita']);
-Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
 
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::post('/login', [AuthController::class, 'login_auth'])->name('login.auth');
@@ -46,10 +45,10 @@ Route::get('/admin/home/cari', [TanamanController::class, 'cari'])->name('admin.
 Route::get('admin/tanaman/{id_tanaman}/detail', [TanamanController::class, 'show'])->name('admin.tanaman.detail');
 Route::get('/admin/tanaman/all', [TanamanController::class, 'showAll'])->name('admin.tanaman.all');
 
-Route::get('/admin/berita', [AdminController::class, 'berita'])->name('admin.berita');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('berita', BeritaController::class);
 });
-Route::get('/admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
-Route::post('/admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
-Route::get('/admin/berita/show/{id}', [BeritaController::class, 'show'])->name('admin.berita.show');
+//Route::get('/admin/berita/list', [BeritaController::class, 'index'])->name('admin.berita.list');
+//Route::get('/admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
+//Route::post('/admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
+//Route::get('/admin/berita/show/{id}', [BeritaController::class, 'show'])->name('admin.berita.show');

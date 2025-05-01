@@ -52,15 +52,21 @@ class TanamanController extends Controller
 
     public function list()
     {
-        // Ambil data kategori dari database
         $kategoriProduktif = TanamanKategori::where('nama_kategori', 'Produktif')->first();
         $kategoriToga = TanamanKategori::where('nama_kategori', 'Toga')->first();
         $kategoriHias = TanamanKategori::where('nama_kategori', 'Hias')->first();
 
-        // Cek apakah kategori ditemukan, jika tidak maka buat koleksi kosong
-        $produktif = $kategoriProduktif ? TanamanDetail::where('id_kategori', $kategoriProduktif->id_kategori)->get() : collect();
-        $toga = $kategoriToga ? TanamanDetail::where('id_kategori', $kategoriToga->id_kategori)->get() : collect();
-        $hias = $kategoriHias ? TanamanDetail::where('id_kategori', $kategoriHias->id_kategori)->get() : collect();
+        $produktif = $kategoriProduktif
+            ? TanamanDetail::with('kategori')->where('id_kategori', $kategoriProduktif->id_kategori)->get()
+            : collect();
+
+        $toga = $kategoriToga
+            ? TanamanDetail::with('kategori')->where('id_kategori', $kategoriToga->id_kategori)->get()
+            : collect();
+
+        $hias = $kategoriHias
+            ? TanamanDetail::with('kategori')->where('id_kategori', $kategoriHias->id_kategori)->get()
+            : collect();
 
         return view('front.admin.tanaman.list', compact('produktif', 'toga', 'hias'));
     }

@@ -31,10 +31,4 @@ class AdminController extends Controller
 
         return view('front.admin.home.dashboard', compact('totalProduktif', 'totalToga', 'totalHias', 'tanamans'));
     }
-
-    public function berita()
-    {
-        $beritas = Kegiatan::orderBy('id', 'desc')->get();
-        return view('front.admin.berita', compact('beritas'));
-    }
 }

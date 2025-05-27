@@ -58,3 +58,22 @@
     </table>
 </div>
 @endsection
+
+<script>
+    const API_KEY = "{{ $apiKey }}";
+
+    fetch("https://api.example.com/data", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${API_KEY}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Data dari API:", data);
+    })
+    .catch(error => {
+        console.error("Gagal mengambil data:", error);
+    });
+</script>

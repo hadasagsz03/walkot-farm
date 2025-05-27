@@ -38,9 +38,12 @@ class BeritaController extends Controller
     {
         $berita_paginate = $this->get_paginate_berita('kegiatan');
 
+        $apiKey = config('services.my_api.key'); // ambil API key dari config
+
         return view('front.admin.berita.list', [
             'beritas' => $berita_paginate['data'] ?? [],
             'pagination' => $berita_paginate,
+            'apiKey' => $apiKey, // oper ke blade
         ]);
     }
 
